@@ -1,5 +1,5 @@
 ROLLNAME 	= kernel
-RELEASE		= UCR
+RELEASE		= EL9
 COLOR		= firebrick
 
 REDHAT.ROOT	= $(PWD)
