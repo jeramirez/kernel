@@ -105,7 +105,8 @@ install foundation-fcgi
 compile sqlite 
 install foundation-sqlite
 
-OSVERSION=$(lsb_release -rs | cut -d . -f 1)
+#OSVERSION=$(lsb_release -rs | cut -d . -f 1)
+OSVERSION=$(cat /etc/os-release | grep VERSION_ID | cut -d\" -f 2 | cut -d . -f 1)
 if [ $OSVERSION == "7" ]; then
 	BUILDPKGS="gtk3-devel-docs glib2-doc gobject-introspection-devel glade-devel \
 	libgnomekbd-devel libxklavier-devel python-nose libtimezonemap-devel libepoxy-devel lorax itstool" 
