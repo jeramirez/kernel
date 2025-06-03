@@ -142,7 +142,8 @@
 #
 # make sure kernel.org is built first and rocks-boot is built last
 #
-ROCKS.OS.VERSION.MAJOR=$(shell lsb_release -rs | cut -d . -f 1)
+#ROCKS.OS.VERSION.MAJOR=$(shell lsb_release -rs | cut -d . -f 1)
+ROCKS.OS.VERSION.MAJOR=$(cat /etc/os-release | grep VERSION_ID | cut -d\" -f 2 | cut -d . -f 1)
 
 SRCDIRS = `find . -maxdepth 1 -type d \
 	-not -name CVS \
@@ -152,6 +153,7 @@ SRCDIRS = `find . -maxdepth 1 -type d \
 	-not -name rocks-boot \
 	-not -name rocks-boot-7 \
 	-not -name rocks-boot-8 \
+        -not -name rocks-boot-9 \
 	-not -name rocks-boot-pxe \
 	-not -name opt-devel-module \
 	-not -name opt-atk \
@@ -178,6 +180,9 @@ ifeq ($(strip $(ROCKS.OS.VERSION.MAJOR)), 8)
 SRCDIRS += rocks-boot-8 rocks-boot-pxe
 endif
 
+# ROCKS9
+ifeq ($(strip $(ROCKS.OS.VERSION.MAJOR)),9)
+SRCDIRS += rocks-boot-9 rocks-boot-pxe
 default:	pkg
 
 foo:
